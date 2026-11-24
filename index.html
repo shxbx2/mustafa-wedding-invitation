@@ -1,15 +1,67 @@
-# Mustafa & Zainab — Wedding Invitation
-
-A mobile-first, animated wedding invitation microsite with a knock-to-open golden door experience.
-
-## Run locally
-Open `index.html` in a browser, or run `python -m http.server 8080` from this folder.
-
-## Deploy
-Static website. No build command is needed; the project root is the output directory.
-
-## Features
-- Knock-to-open double door animation
-- Animated reveal and scrolling original invitation scans
-- Corrected wedding date: Tuesday 19th January 2027
-- Responsive layout and reduced-motion support
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#21160f">
+<meta name="description" content="A wedding invitation for Mustafa & Zainab — 19 January 2027, Bhopal.">
+<title>Mustafa & Zainab — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c79a4b;--cream:#f8f1e5}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#140e0a;color:var(--cream);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 40%,#50351b55,transparent 55%),linear-gradient(130deg,#100b08,#2b1c11 55%,#100b08)}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}.spark{position:absolute;width:3px;height:3px;border-radius:50%;background:#f6d99d;box-shadow:0 0 12px 3px #d4a95a88;animation:twinkle 3s infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:.12;transform:scale(.5)}50%{opacity:1;transform:scale(1.4)}}
+.intro{position:relative;z-index:2;min-height:100svh;display:grid;place-items:center;padding:24px;perspective:1400px}
+.door-scene{width:min(92vw,540px);height:min(78svh,720px);min-height:520px;position:relative;display:grid;grid-template-columns:1fr 1fr;filter:drop-shadow(0 24px 55px #000b);perspective:1600px}
+.door-frame{position:absolute;inset:-13px;border:2px solid #a87831;border-radius:8px;box-shadow:inset 0 0 0 5px #5b3c1b,inset 0 0 0 7px #e5c27b,0 0 30px #d3a45144;pointer-events:none}
+.door{position:relative;overflow:hidden;background:linear-gradient(105deg,#6f451c,#d9b36e 18%,#8e5b26 34%,#e8c984 51%,#76501f 80%,#3e2918);border:2px solid #d8b46e;transform-style:preserve-3d;transition:transform 2s cubic-bezier(.2,.7,.1,1);backface-visibility:hidden}
+.door.left{transform-origin:left center;border-radius:7px 0 0 7px}.door.right{transform-origin:right center;border-radius:0 7px 7px 0}
+.door:before{content:"";position:absolute;inset:12px;border:1px solid #f1d89e;box-shadow:inset 0 0 0 5px #7d5427,inset 0 0 0 6px #e4c27a,inset 0 0 35px #2a180b;background:repeating-linear-gradient(90deg,#0000 0 18px,#ffffff0b 19px 20px),linear-gradient(145deg,#a77535,#d6b16c 45%,#754b20)}
+.door:after{content:"";position:absolute;inset:32px 25px;border:2px solid #f0d18b;border-radius:48% 48% 8px 8px;box-shadow:inset 0 0 0 5px #835a2b,inset 0 0 0 7px #e7c780}
+.panel{position:absolute;z-index:2;inset:48px 35px 50px;border:1px solid #f4d99c;border-radius:48% 48% 12px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff0ca;text-shadow:0 2px 4px #321c0a;padding:12px}
+.panel small{letter-spacing:.35em;text-transform:uppercase;font-size:11px}.panel h1{font-family:'Great Vibes',cursive;font-size:clamp(38px,8vw,64px);font-weight:400;line-height:1.05;margin:18px 0 5px}.panel .amp{font-size:18px;color:#f6d99d}.panel p{font-size:15px;letter-spacing:.12em;margin:14px 0 0}
+.knocker{position:absolute;z-index:5;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:106px;display:grid;place-items:center;transition:opacity .6s}
+.ring{width:48px;height:48px;border:6px solid #f1d28d;border-radius:50%;box-shadow:0 0 0 3px #7a4e20,inset 0 0 8px #fff6;position:relative}.ring:after{content:"";position:absolute;width:11px;height:25px;background:linear-gradient(90deg,#88571e,#f6d995,#8a5a24);left:13px;top:34px;border-radius:8px}
+.knocker:before{content:"";position:absolute;top:0;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff2bf,#b47a2f 65%,#5c3918);box-shadow:0 2px 5px #0008}
+.knock-btn{position:absolute;z-index:8;bottom:-72px;left:50%;transform:translateX(-50%);border:1px solid #d9b46b;background:linear-gradient(135deg,#f2dba8,#b98539);color:#28190d;padding:13px 27px;border-radius:999px;letter-spacing:.2em;font:600 12px 'Cormorant Garamond',serif;cursor:pointer;white-space:nowrap;box-shadow:0 7px 22px #0008;transition:.25s}
+.knock-btn:hover{transform:translateX(-50%) translateY(-3px);box-shadow:0 12px 28px #0009}
+.hint{position:absolute;bottom:-120px;left:0;right:0;text-align:center;color:#e9cf9b;font-size:14px;letter-spacing:.16em;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.48}}.knocking .knocker{animation:rap .65s ease-in-out 3;transform-origin:50% 10%}
+@keyframes rap{0%,100%{transform:translate(-50%,-50%) rotate(0)}22%{transform:translate(-50%,-50%) rotate(-17deg)}45%{transform:translate(-50%,-50%) rotate(13deg)}68%{transform:translate(-50%,-50%) rotate(-8deg)}}
+.opened .door.left{transform:rotateY(-108deg)}.opened .door.right{transform:rotateY(108deg)}.opened .knocker,.opened .knock-btn,.opened .hint{opacity:0;pointer-events:none}
+.glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse,#ffe9b7 0%,#c18a3b44 35%,transparent 70%);opacity:0;transition:opacity 1.8s}.opened .glow{opacity:1}
+.scroll-note{position:relative;z-index:2;text-align:center;padding:130px 20px 45px;color:#e9d5ad;opacity:0;transform:translateY(24px);transition:1.2s}
+.scroll-note.show{opacity:1;transform:none}.scroll-note .eyebrow{letter-spacing:.32em;text-transform:uppercase;font-size:11px}.scroll-note h2{font:48px 'Great Vibes',cursive;color:#f0d18c;margin:10px 0}.scroll-note p{font-size:18px;margin:0}
+.invitation{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 18px 110px;opacity:0;transform:translateY(50px);transition:1.3s}
+.invitation.show{opacity:1;transform:none}.page{position:relative;max-width:620px;margin:0 auto 42px;padding:10px;background:#f7f0e6;box-shadow:0 25px 70px #0009;border:1px solid #c9a25d;overflow:hidden}
+.page img{display:block;width:100%;height:auto}.page:after{content:"";position:absolute;inset:10px;border:1px solid #d0a65b;pointer-events:none}
+.page-label{text-align:center;color:#d8bd8c;letter-spacing:.28em;text-transform:uppercase;font-size:10px;margin:0 0 14px}
+.final-note{position:relative;z-index:2;text-align:center;padding:50px 20px 90px;color:#e9d5ad}.final-note .ornament{color:#d4aa5e;font-size:28px;letter-spacing:.5em}.final-note h2{font:52px 'Great Vibes',cursive;color:#f0d18c;margin:8px}.final-note p{font-size:18px;line-height:1.5}
+.topline{height:1px;width:90px;margin:18px auto;background:linear-gradient(90deg,transparent,#d4aa5e,transparent)}
+.replay{border:1px solid #cda65f;background:transparent;color:#f0d9ad;border-radius:30px;padding:12px 22px;font:15px 'Cormorant Garamond',serif;letter-spacing:.1em;cursor:pointer;margin-top:15px}
+@media(max-width:480px){.door-scene{min-height:500px;height:70svh}.panel{inset:42px 24px 44px}.panel h1{font-size:40px}.knock-btn{bottom:-62px}.hint{bottom:-106px}.scroll-note{padding-top:110px}.page{padding:6px}.page:after{inset:6px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<section class="intro" id="intro"><div class="door-scene" id="scene" aria-label="A pair of ornate golden wedding doors">
+<div class="glow"></div><div class="door left"><div class="panel"><small>A special invitation</small><h1>Mustafa</h1><div class="amp">weds</div><h1>Zainab</h1><p>19 · JANUARY · 2027</p></div></div>
+<div class="door right"><div class="panel"><small>With the blessings of</small><h1>Allah</h1><div class="amp">you are invited</div><p>BHOPAL · INDIA</p></div></div>
+<div class="knocker"><div class="ring"></div></div><div class="door-frame"></div>
+<button class="knock-btn" id="knock">KNOCK TO ENTER</button><div class="hint">A beautiful celebration awaits you</div>
+</div></section>
+<section class="scroll-note" id="scrollNote"><div class="eyebrow">The doors are open</div><h2>With joy & blessings</h2><p>We request the pleasure of your presence</p><div class="topline"></div></section>
+<main class="invitation" id="invitation">
+<div class="page-label">The wedding invitation · 01</div><figure class="page"><img src="assets/invitation-front-optimized.webp" alt="Wedding invitation cover for Mustafa and Zainab, dated Tuesday 19th January 2027"></figure>
+<div class="page-label">The wedding invitation · 02</div><figure class="page"><img src="assets/invitation-details-optimized.webp" alt="Full wedding invitation details for Mustafa and Zainab in Bhopal"></figure>
+</main>
+<footer class="final-note" id="finalNote"><div class="ornament">✦ ✧ ✦</div><h2>We await your presence</h2><p>May Allah bless this beautiful union<br>with love, happiness and barakah.</p><button class="replay" id="replay">REPLAY THE EXPERIENCE</button></footer>
+<script>
+const stars=document.getElementById('stars');for(let i=0;i<55;i++){const s=document.createElement('i');s.className='spark';s.style.left=(Math.random()*100)+'%';s.style.top=(Math.random()*100)+'%';s.style.animationDelay=(Math.random()*4)+'s';s.style.opacity=Math.random();stars.appendChild(s)}
+const scene=document.getElementById('scene'),button=document.getElementById('knock');let opened=false;
+function playKnock(){try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;const ctx=new Ctx();[0,.22,.44].forEach((delay,i)=>{const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='triangle';osc.frequency.setValueAtTime(115-i*7,ctx.currentTime+delay);gain.gain.setValueAtTime(.0001,ctx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(.22,ctx.currentTime+delay+.012);gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+.13);osc.connect(gain);gain.connect(ctx.destination);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+.14)});setTimeout(()=>ctx.close(),1100)}catch(e){}}
+function reveal(){if(opened)return;opened=true;scene.classList.add('knocking');button.disabled=true;playKnock();setTimeout(()=>{scene.classList.remove('knocking');scene.classList.add('opened');setTimeout(()=>{document.getElementById('scrollNote').classList.add('show');document.getElementById('invitation').classList.add('show');document.getElementById('finalNote').classList.add('show');setTimeout(()=>document.getElementById('scrollNote').scrollIntoView({behavior:'smooth',block:'start'}),450)},950)},1700)}
+button.addEventListener('click',reveal);scene.addEventListener('click',e=>{if(!opened&&e.target!==button)reveal()});
+document.getElementById('replay').addEventListener('click',()=>{opened=false;scene.classList.remove('opened','knocking');button.disabled=false;['scrollNote','invitation','finalNote'].forEach(id=>document.getElementById(id).classList.remove('show'));window.scrollTo({top:0,behavior:'smooth'})});
+</script></body></html>
